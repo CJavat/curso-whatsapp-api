@@ -26,7 +26,8 @@ const reciveMessage = (req, res) => {
     if (typeof messagoes === "undefined") {
       const messages = messageObject[0];
       const text = GetTextUser(messages);
-      const number = messages.from;
+      // const number = messages.from;
+      const number = "523312135312";
 
       // myConsole.log(messageObject);
       console.log({ messageObject });
