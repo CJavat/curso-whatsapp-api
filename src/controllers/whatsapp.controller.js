@@ -31,6 +31,7 @@ const reciveMessage = (req, res) => {
       // myConsole.log(messageObject);
       console.log({ messageObject });
       console.log({ text });
+      console.log({ number });
 
       whatsappService.sendMessageWhatsApp("El usuario dijo" + text, number);
     }
