@@ -23,9 +23,12 @@ const reciveMessage = (req, res) => {
     const changes = entry["changes"][0];
     const value = changes["value"];
     const messageObject = value["messages"];
+    const messages = messageObject[0];
+    const text = GetTextUser(messages);
 
     // myConsole.log(messageObject);
-    console.log(messageObject);
+    console.log({ messageObject });
+    console.log({ text });
 
     res.send("EVENT_RECEIVED");
   } catch (error) {
@@ -33,6 +36,32 @@ const reciveMessage = (req, res) => {
     res.send("EVENT_RECEIVED"); // Devolver este valor para que no haya bucle
   }
 };
+
+function GetTextUser(message) {
+  let text = "";
+  const typeMessage = message["type"].toLowerCase();
+
+  if (typeMessage == "text") {
+    text = message["text"]["body"];
+  } else if (typeMessage == "interactive") {
+    const interactiveObject = message["interactive"];
+    const typeInteractive = interactiveObject["type"];
+
+    console.log(interactiveObject);
+
+    if (typeInteractive == "button_reply") {
+      text = interactiveObject["button_reply"]["title"];
+    } else if (typeInteractive == "list_reply") {
+      text = interactiveObject["list_reply"]["title"];
+    } else {
+      console.log("Sin mensaje");
+    }
+  } else {
+    console.log("Sin mensaje");
+  }
+
+  return text;
+}
 
 module.exports = {
   verifyToken,
