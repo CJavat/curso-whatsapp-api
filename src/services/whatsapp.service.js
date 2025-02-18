@@ -38,4 +38,4 @@ function sendMessageWhatsApp(textResponse, number) {
   req.end();
 }
 
-module.export = { sendMessageWhatsApp };
+module.exports = { sendMessageWhatsApp };
