@@ -1,3 +1,6 @@
+const fs = require("fs");
+const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
+
 const verifyToken = (req, res) => {
   try {
     const accessToken = "ASHCSTOSasdasdasddwASDASDAS";
@@ -15,7 +18,19 @@ const verifyToken = (req, res) => {
 };
 
 const reciveMessage = (req, res) => {
-  res.send("hola recive");
+  try {
+    const entry = req.body["entry"][0];
+    const changes = entry["changes"][0];
+    const value = changes["value"];
+    const messageObject = value["messages"];
+
+    myConsole.log(messageObject);
+
+    res.send("EVENT_RECEIVED");
+  } catch (error) {
+    myConsole.log(error);
+    res.send("EVENT_RECEIVED"); // Devolver este valor para que no haya bucle
+  }
 };
 
 module.exports = {
