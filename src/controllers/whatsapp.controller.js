@@ -4,7 +4,7 @@ const verifyToken = (req, res) => {
     const token = req.query("hub.verify_token");
     const challenge = req.query("hub.challenge");
 
-    if (challenge !== null && token !== null && token == accessToken) {
+    if (challenge != null && token != null && token == accessToken) {
       res.send(challenge);
     } else {
       res.status(400).send();
