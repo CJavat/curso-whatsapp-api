@@ -1,4 +1,5 @@
 const whatsappService = require("../services/whatsapp.service");
+const samples = require("../shared/sampleModels");
 
 const verifyToken = (req, res) => {
   try {
@@ -23,7 +24,7 @@ const reciveMessage = (req, res) => {
     const value = changes["value"];
     const messageObject = value["messages"];
 
-    if (typeof messagoes === "undefined") {
+    if (typeof messageObject != "undefined") {
       const messages = messageObject[0];
       const text = GetTextUser(messages);
       // const number = messages.from;
@@ -34,7 +35,34 @@ const reciveMessage = (req, res) => {
       console.log({ text });
       console.log({ number });
 
-      whatsappService.sendMessageWhatsApp("El usuario dijo" + text, number);
+      if (text == "text") {
+        const data = samples.sampleText("Hola usuario", "523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "image") {
+        const data = samples.sampleImage("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "video") {
+        const data = samples.sampleVideo("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "audio") {
+        const data = samples.sampleAudio("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "document") {
+        const data = samples.sampleDocument("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "button") {
+        const data = samples.sampleButtons("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "list") {
+        const data = samples.sampleList("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else if (text == "location") {
+        const data = samples.sampleLocation("523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      } else {
+        const data = samples.sampleText("No entiendo", "523312135312");
+        whatsappService.sendMessageWhatsApp(data);
+      }
     }
 
     res.send("EVENT_RECEIVED");
