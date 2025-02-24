@@ -57,6 +57,7 @@ function sampleDocument(number) {
     type: "document",
     document: {
       link: "https://biostoragecloud.blob.core.windows.net/resource-udemy-whatsapp-node/document_whatsapp.pdf",
+      caption: "Titulo del documento",
     },
   });
 
