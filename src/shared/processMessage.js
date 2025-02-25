@@ -17,6 +17,8 @@ function process(textUser, number) {
       number
     );
     models.push(model);
+    const modelList = whatsappModel.messageList(number);
+    models.push(modelList);
   } else if (
     textUser.includes("adios") ||
     textUser.includes("adiós") ||
