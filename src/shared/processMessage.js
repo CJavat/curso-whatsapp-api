@@ -11,14 +11,23 @@ function process(textUser, number) {
       number
     );
     models.push(model);
+    const modelList = whatsappModel.messageList(number);
+    models.push(modelList);
   } else if (textUser.includes("gracias")) {
     const model = whatsappModel.messageText(
       "Gracias a ti por contactarnos, estamos para servirte",
       number
     );
     models.push(model);
-    const modelList = whatsappModel.messageList(number);
-    models.push(modelList);
+  } else if (textUser.includes("comprar")) {
+    const model = whatsappModel.messageButtons(number);
+    models.push(model);
+  } else if (textUser.includes("vender")) {
+    const model = whatsappModel.messageText(
+      "Registrate en el siguiente formulario: https://www.miweb.com/formulario",
+      number
+    );
+    models.push(model);
   } else if (
     textUser.includes("adios") ||
     textUser.includes("adiós") ||
