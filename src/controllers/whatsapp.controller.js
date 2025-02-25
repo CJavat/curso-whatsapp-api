@@ -1,5 +1,6 @@
-const whatsappService = require("../services/whatsapp.service");
-const samples = require("../shared/sampleModels");
+// const whatsappService = require("../services/whatsapp.service");
+// const samples = require("../shared/sampleModels");
+const processMessage = require("../shared/processMessage");
 
 const verifyToken = (req, res) => {
   try {
@@ -35,34 +36,38 @@ const reciveMessage = (req, res) => {
       console.log({ text });
       console.log({ number });
 
-      if (text == "text") {
-        const data = samples.sampleText("Hola usuario", "523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "image") {
-        const data = samples.sampleImage("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "video") {
-        const data = samples.sampleVideo("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "audio") {
-        const data = samples.sampleAudio("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "document") {
-        const data = samples.sampleDocument("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "button") {
-        const data = samples.sampleButtons("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "list") {
-        const data = samples.sampleList("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else if (text == "location") {
-        const data = samples.sampleLocation("523312135312");
-        whatsappService.sendMessageWhatsApp(data);
-      } else {
-        const data = samples.sampleText("No entiendo", "523312135312");
-        whatsappService.sendMessageWhatsApp(data);
+      if (text != "") {
+        processMessage.process(text, number);
       }
+
+      // if (text == "text") {
+      //   const data = samples.sampleText("Hola usuario", "523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "image") {
+      //   const data = samples.sampleImage("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "video") {
+      //   const data = samples.sampleVideo("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "audio") {
+      //   const data = samples.sampleAudio("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "document") {
+      //   const data = samples.sampleDocument("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "button") {
+      //   const data = samples.sampleButtons("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "list") {
+      //   const data = samples.sampleList("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else if (text == "location") {
+      //   const data = samples.sampleLocation("523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // } else {
+      //   const data = samples.sampleText("No entiendo", "523312135312");
+      //   whatsappService.sendMessageWhatsApp(data);
+      // }
     }
 
     res.send("EVENT_RECEIVED");
