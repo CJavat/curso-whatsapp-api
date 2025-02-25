@@ -99,8 +99,26 @@ function messageButtons(number) {
   return data;
 }
 
+function messageLocation(number) {
+  const data = JSON.stringify({
+    messaging_product: "whatsapp",
+    to: number,
+    type: "location",
+    location: {
+      latitude: "20.65470712621329",
+      longitude: "-103.35296001890289",
+      name: "HORTOMALLAS®",
+      address:
+        "Cardenal 26-Interior 9, Rincón de La Agua Azul, 44467 Guadalajara, Jal.",
+    },
+  });
+
+  return data;
+}
+
 module.exports = {
   messageText,
   messageList,
   messageButtons,
+  messageLocation,
 };

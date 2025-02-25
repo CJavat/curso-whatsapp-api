@@ -28,6 +28,15 @@ function process(textUser, number) {
       number
     );
     models.push(model);
+  } else if (textUser.includes("agencia")) {
+    const model = whatsappModel.messageLocation(number);
+    models.push(model);
+  } else if (textUser.includes("contacto")) {
+    const model = whatsappModel.messageText(
+      "*Centro De Contacto:*\n +52 33 1213 5312",
+      number
+    );
+    models.push(model);
   } else if (
     textUser.includes("adios") ||
     textUser.includes("adiós") ||
