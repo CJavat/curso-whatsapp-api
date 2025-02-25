@@ -18,10 +18,10 @@ function process(textUser, number) {
     );
     models.push(model);
   } else if (
-    (textUser.includes("adios"),
-    textUser.includes("adiós"),
-    textUser.includes("bye"),
-    textUser.includes("me voy"))
+    textUser.includes("adios") ||
+    textUser.includes("adiós") ||
+    textUser.includes("bye") ||
+    textUser.includes("me voy")
   ) {
     const model = whatsappModel.messageText(
       "Adiós, muchas gracias por contactarnos.",
