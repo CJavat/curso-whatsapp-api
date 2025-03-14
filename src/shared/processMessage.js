@@ -1,11 +1,13 @@
 const whatsappModel = require("../shared/whatsappModels");
 const whatsappService = require("../services/whatsapp.service");
+const chatgptService = require("../services/chatgpt.service");
 
-function process(textUser, number) {
+async function process(textUser, number) {
   textUser = textUser.toLowerCase();
   let models = [];
 
-  if (textUser.includes("hola")) {
+  //#region SinChatGPT
+  /*if (textUser.includes("hola")) {
     const model = whatsappModel.messageText(
       "Hola, ¿en qué puedo ayudarte?",
       number
@@ -54,7 +56,23 @@ function process(textUser, number) {
       number
     );
     models.push(model);
+  }*/
+  //#endregion
+
+  //#region ConChatGPT
+  const resultChatGpt = await chatgptService.getMessageChatGPT(textUser);
+
+  if (resultChatGpt !== null) {
+    const model = whatsappModel.messageText(resultChatGpt, number);
+    models.push(model);
+  } else {
+    const model = whatsappModel.messageText(
+      "No estoy entendiendo lo que dices.",
+      number
+    );
+    models.push(model);
   }
+  //#endregion
 
   models.forEach((model) => {
     whatsappService.sendMessageWhatsApp(model);

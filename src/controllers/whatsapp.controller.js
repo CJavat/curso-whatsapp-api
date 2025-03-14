@@ -18,7 +18,7 @@ const verifyToken = (req, res) => {
   }
 };
 
-const reciveMessage = (req, res) => {
+const reciveMessage = async (req, res) => {
   try {
     const entry = req.body["entry"][0];
     const changes = entry["changes"][0];
@@ -37,7 +37,7 @@ const reciveMessage = (req, res) => {
       console.log({ number });
 
       if (text != "") {
-        processMessage.process(text, number);
+        await processMessage.process(text, number);
       }
 
       // if (text == "text") {
