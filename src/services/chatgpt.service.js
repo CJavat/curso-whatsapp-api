@@ -2,7 +2,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 async function getMessageChatGPT(text) {
   const configuration = new Configuration({
-    apiKey: process.env.CHATGPT_SECRET,
+    apiKey: process.env.CHATGPT_KEY,
   });
 
   const openai = new OpenAIApi(configuration);
