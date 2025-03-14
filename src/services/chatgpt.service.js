@@ -1,23 +1,33 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 
 async function getMessageChatGPT(text) {
-  const configuration = new Configuration({
-    apiKey: process.env.CHATGPT_KEY,
-  });
+  try {
+    // Inicializa el cliente de OpenAI
+    const openai = new OpenAI({
+      apiKey: process.env.CHATGPT_KEY, // Asegúrate de que esta variable esté configurada correctamente
+    });
 
-  const openai = new OpenAIApi(configuration);
+    // Envía la solicitud a la API
+    const response = await openai.chat.completions.create({
+      model: "gpt-4", // Usa "gpt-4" o "gpt-3.5-turbo"
+      messages: [
+        { role: "user", content: text }, // El mensaje del usuario
+      ],
+      max_tokens: 100, // Límite de tokens
+    });
 
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: text,
-    maxTokens: 100,
-  });
-
-  if (response.status === 200 && response.data.choices.length > 0) {
-    return response.data.choices[0].text.trim();
+    // Verificar si la respuesta es válida y contiene opciones
+    if (response.choices && response.choices.length > 0) {
+      console.log(response.choices[0].message.content); // Muestra el texto generado por ChatGPT
+      return response.choices[0].message.content.trim();
+    } else {
+      console.error("No se recibieron respuestas válidas de la API.");
+      return null; // Si no hay resultados, devuelve null
+    }
+  } catch (error) {
+    console.error("Error al interactuar con la API de OpenAI:", error);
+    return null; // Si ocurre un error, devuelve null
   }
-
-  return null;
 }
 
 module.exports = {

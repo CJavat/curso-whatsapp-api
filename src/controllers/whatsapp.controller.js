@@ -32,9 +32,9 @@ const reciveMessage = async (req, res) => {
       const number = "523312135312";
 
       // myConsole.log(messageObject);
-      console.log({ messageObject });
-      console.log({ text });
-      console.log({ number });
+      // console.log({ messageObject });
+      // console.log({ text });
+      // console.log({ number });
 
       if (text != "") {
         await processMessage.process(text, number);
